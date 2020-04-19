@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+import Box from './Box';
+import CrossButton from './CrossButton';
+import NoughtButton from './NoughtButton';
+import { StateProvider } from './state';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App: React.FC = () => {
+	return (
+		<StateProvider>
+			<div>
+				<CrossButton />
+				<NoughtButton />
+				<div className='grid'>
+					<div className='container'>
+						<Box />
+						<Box />
+						<Box />
+					</div>
+					<div className='container'>
+						<Box />
+						<Box />
+						<Box />
+					</div>
+					<div className='container'>
+						<Box />
+						<Box />
+						<Box />
+					</div>
+				</div>
+			</div>
+		</StateProvider>
+	);
 }
 
 export default App;

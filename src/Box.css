@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.box-cls {
+    border: 1px solid black;
+    flex-grow: 1;
+    height: 100px;
+}
+
+.clicked {
+    background: cornflowerblue;
+}
