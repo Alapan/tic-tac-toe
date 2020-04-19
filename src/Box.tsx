@@ -11,18 +11,10 @@ const Box: React.FC = () => {
 
     const { state } = useContext(StateContext);
 
-    boxCls = clicked && state.isBoxSelected ? 'box-cls clicked' : 'box-cls';
+    boxCls = clicked ? 'box-cls clicked' : 'box-cls';
 
     const handleClick = () => {
-        // Clicking currently active box
-        if (clicked && state.isBoxSelected) {
-            setClicked(false);
-            state.isBoxSelected = false;
-        } else if (!clicked && !state.isBoxSelected) {
-        // No box is active
-            setClicked(true);
-            state.isBoxSelected = true;
-        }
+        setClicked(!clicked);
     }
 
     return (
