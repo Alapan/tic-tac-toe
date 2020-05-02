@@ -6,11 +6,11 @@ import { StateContext } from './state';
 const CrossButton: React.FC = () => {
 
     const handleClick = () => {
-        dispatch({type: 'cross'})
+        dispatch({ type: 'cross' });
     }
 
     const classes = useStyles();
-    const {dispatch} = useContext(StateContext);
+    const { dispatch } = useContext(StateContext);
 
     return (
         <Button

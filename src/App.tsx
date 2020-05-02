@@ -6,6 +6,7 @@ import { StateProvider } from './state';
 import './App.css';
 
 const App: React.FC = () => {
+
 	return (
 		<StateProvider>
 			<div>
@@ -13,19 +14,19 @@ const App: React.FC = () => {
 				<NoughtButton />
 				<div className='grid'>
 					<div className='container'>
-						<Box />
-						<Box />
-						<Box />
+						<Box identifier={1}/>
+						<Box identifier={2}/>
+						<Box identifier={3}/>
 					</div>
 					<div className='container'>
-						<Box />
-						<Box />
-						<Box />
+						<Box identifier={4}/>
+						<Box identifier={5}/>
+						<Box identifier={6}/>
 					</div>
 					<div className='container'>
-						<Box />
-						<Box />
-						<Box />
+						<Box identifier={7}/>
+						<Box identifier={8}/>
+						<Box identifier={9}/>
 					</div>
 				</div>
 			</div>

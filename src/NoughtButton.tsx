@@ -6,12 +6,12 @@ import { StateContext } from './state';
 const NoughtButton: React.FC = () => {
 
     const handleClick = () => {
-        dispatch({ type: 'nought'});
+        dispatch({ type: 'nought' });
     }
 
     const classes = useStyles();
-
     const { dispatch } = useContext(StateContext);
+
     return (
         <Button
             variant='contained'

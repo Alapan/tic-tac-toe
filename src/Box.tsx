@@ -1,32 +1,40 @@
 import React, { useState, useContext } from 'react';
 import Nought from './Nought';
 import './Box.css';
-import { StateContext } from './state';
 import Cross from './Cross';
+import { StateContext } from './state';
 
-const Box: React.FC = () => {
+interface BoxProps {
+    identifier: number
+}
 
-    const [clicked, setClicked] = useState<boolean>(false);
-    let boxCls: string = 'box-cls';
+const Box: React.FC<BoxProps> = ({ identifier }) => {
 
-    const { state } = useContext(StateContext);
+    const [boxValue, setBoxValue] = useState<string>('');
+    const { state, dispatch } = useContext(StateContext);
 
-    boxCls = clicked ? 'box-cls clicked' : 'box-cls';
+    const handleOnMouseDown = () => {
+        setBoxValue(state.selectedValue)
+    }
 
-    const handleClick = () => {
-        setClicked(!clicked);
+    const handleOnMouseUp = () => {
+        dispatch({
+            type: 'update',
+            value: identifier
+        });
     }
 
     return (
         <div
-            className={boxCls}
-            onClick={handleClick}
+            className='box-cls'
+            onMouseDown={handleOnMouseDown}
+            onMouseUp={handleOnMouseUp}
         >
-           {clicked ? (
-               state.selectedValue === 'nought' ?
-               <Nought />: (state.selectedValue === 'cross' ?
+           {
+               boxValue === 'nought' ?
+               <Nought />: (boxValue === 'cross' ?
                <Cross />: null)
-            ) : null}
+            }
         </div>
     );
 }

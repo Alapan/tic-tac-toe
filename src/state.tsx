@@ -3,23 +3,25 @@ import React, {
     useReducer
 } from 'react';
 
+
 interface State {
     selectedValue: string,
-    isBoxSelected: boolean
+    matrix: object[]
 }
 
 interface Action {
-    type: string
+    type: string,
+    value?: number
 }
 
 interface ContextProps {
     state: State,
-    dispatch: ({type}: {type: string}) => void
+    dispatch: ({type, value}: {type: string, value?: number}) => void
 }
 
 const initialState = {
     selectedValue: '',
-    isBoxSelected: false
+    matrix: []
 }
 
 const reducer = (state: State, action: Action) => {
@@ -33,7 +35,18 @@ const reducer = (state: State, action: Action) => {
             return {
                 ...state,
                 selectedValue: 'cross'
+            };
+        case 'update': {
+            return {
+                ...state,
+                matrix: [
+                    ...state.matrix,
+                    {
+                        position: action.value, value: state.selectedValue
+                    }
+                ]
             }
+        }
         default:
             return state;
     }
