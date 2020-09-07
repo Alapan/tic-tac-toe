@@ -20,6 +20,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "lint": "tslint -c tslint.json src/**/*.{ts,tsx} --fix --format verbose",
+    "prettier": "npx prettier --write src/**/*.{ts,tsx}",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -37,5 +39,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.1.1",
+    "tslint": "^6.1.3"
   }
 }
