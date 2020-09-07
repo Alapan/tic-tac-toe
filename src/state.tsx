@@ -1,8 +1,8 @@
 import React, { createContext, useReducer } from 'react'
 
 interface State {
-  selectedValue: string
   matrix: object[]
+  selectedValue: string
 }
 
 interface Action {
@@ -11,13 +11,13 @@ interface Action {
 }
 
 interface ContextProps {
-  state: State
   dispatch: ({ type, value }: { type: string; value?: number }) => void
+  state: State
 }
 
 const initialState = {
-  selectedValue: '',
   matrix: [],
+  selectedValue: '',
 }
 
 const reducer = (state: State, action: Action) => {

@@ -1,4 +1,4 @@
-import { Theme, makeStyles } from '@material-ui/core/styles'
+import { makeStyles, Theme } from '@material-ui/core/styles'
 
 const useStyles = makeStyles<Theme>({
   button: {

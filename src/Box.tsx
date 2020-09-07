@@ -1,13 +1,13 @@
-import React, { useState, useContext, useEffect } from 'react'
-import Nought from './Nought'
+import isEqual from 'lodash.isequal'
+import React, { useContext, useEffect, useState } from 'react'
 import './Box.css'
 import Cross from './Cross'
+import Nought from './Nought'
 import { StateContext } from './state'
-const isEqual = require('lodash.isequal')
 
 interface BoxProps {
+  gameOverHandler: () => void
   identifier: number
-  gameOverHandler: Function
 }
 
 const Box: React.FC<BoxProps> = ({ identifier, gameOverHandler }) => {
@@ -25,7 +25,7 @@ const Box: React.FC<BoxProps> = ({ identifier, gameOverHandler }) => {
     })
   }
 
-  const getNoughtOrCrossPositions = (type: String): Array<number> => {
+  const getNoughtOrCrossPositions = (type: string): number[] => {
     const { matrix } = state
     const entries = matrix.filter((selection) => {
       // @ts-ignore

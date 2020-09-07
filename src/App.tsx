@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
+import './App.css'
 import Box from './Box'
 import CrossButton from './CrossButton'
 import NoughtButton from './NoughtButton'
 import { StateProvider } from './state'
-import './App.css'
 import WinningLine from './WinningLine'
 
 const App: React.FC = () => {
