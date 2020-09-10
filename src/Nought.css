@@ -1,0 +1,75 @@
+.nought_wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.right {
+  border: black solid 5px;
+  height: 25px;
+  width: 25px;
+  border-radius: 120px;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  position: absolute;
+  transform: rotate(-45deg);
+  animation: circleRight 1000ms linear;
+  -moz-animation: circleRight 1000ms linear;
+  -o-animation: circleRight 1000ms linear;
+  -webkit-animation: circleRight 1000ms linear;
+}
+
+@keyframes circleRight {
+  from {transform: rotate(-225deg);}
+  to {transform: rotate(-45deg);}
+}
+
+@-o-keyframes circleRight {
+  from {transform: rotate(-225deg);}
+  to {transform: rotate(-45deg);}
+}
+
+@-moz-keyframes circleRight {
+  from {transform: rotate(-225deg);}
+  to {transform: rotate(-45deg);}
+}
+
+@-webkit-keyframes circleRight {
+  from {transform: rotate(-225deg);}
+  to {transform: rotate(-45deg);}
+}
+
+.left {
+  border: black solid 5px;
+  height: 25px;
+  width: 25px;
+  border-radius: 120px;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  position: absolute;
+  transform: rotate(315deg);
+  animation: circleLeft 2000ms linear;
+  -moz-animation: circleLeft 2000ms linear;
+  -o-animation: circleLeft 2000ms linear;
+  -webkit-animation: circleLeft 2000ms linear;
+}
+
+@keyframes circleLeft {
+  from {transform: rotate(-45deg);}
+  to {transform: rotate(315deg);}
+}
+
+@-o-keyframes circleLeft {
+  from {transform: rotate(-45deg);}
+  to {transform: rotate(315deg);}
+}
+
+@-moz-keyframes circleLeft {
+  from {transform: rotate(-45deg);}
+  to {transform: rotate(315deg);}
+}
+
+@-webkit-keyframes circleLeft {
+  from {transform: rotate(-45deg);}
+  to {transform: rotate(315deg);}
+}
