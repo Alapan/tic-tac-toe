@@ -1,0 +1,49 @@
+.cross_wrapper {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+}
+
+.draw1 {
+  background: black;
+  width: 50px;
+  height: 5px;
+  position: absolute;
+  transform: rotate(45deg);
+  transform-origin: 0 5px;
+  animation: l_to_r 1000ms linear;
+  -moz-animation: l_to_r 1000ms linear;
+  -o-animation: l_to_r 1000ms linear;
+  -webkit-animation: l_to_r 1000ms linear;
+}
+
+@keyframes l_to_r {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 50px;
+  }
+}
+
+.draw2 {
+  background: black;
+  width: 50px;
+  height: 5px;
+  position: absolute;
+  transform: rotate(135deg);
+  transform-origin: 18px 10px;
+  animation: l_to_r 1000ms linear;
+  -moz-animation: l_to_r 1000ms linear;
+  -o-animation: l_to_r 1000ms linear;
+  -webkit-animation: l_to_r 1000ms linear;
+}
+
+@keyframes r_to_l {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 50px;
+  }
+}

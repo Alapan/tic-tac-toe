@@ -32,6 +32,7 @@ const Box: React.FC<BoxProps> = ({ identifier, gameOverHandler }) => {
       if (selection.value === type) {
         return selection
       }
+      return null
     })
     // @ts-ignore
     return entries.map((entry) => entry.position).sort()
