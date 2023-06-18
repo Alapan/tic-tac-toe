@@ -1,15 +1,19 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+
 import useStyles from './ButtonStyles';
-import { StateContext } from './state';
+import { setSelectedValue } from './actions';
+import { MoveType } from './types';
 
 const NoughtButton: React.FC = () => {
+  const dispatch = useDispatch();
+
   const handleClick = () => {
-    dispatch({ type: 'nought' });
+    dispatch(setSelectedValue(MoveType.NOUGHT))
   }
 
   const classes = useStyles();
-  const { dispatch } = useContext(StateContext);
 
   return (
     <Button

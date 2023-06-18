@@ -1,16 +1,22 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button } from '@material-ui/core';
-import useStyles from './ButtonStyles';
-import { StateContext } from './state';
+import { useDispatch } from 'react-redux';
 
-const CrossButton: React.FC = () => {
+import useStyles from './ButtonStyles';
+import { setSelectedValue } from './actions';
+import { MoveType } from './types';
+import { GameState } from './state';
+
+
+const CrossButton = () => {
+
+  const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch({ type: 'cross' });
+    dispatch(setSelectedValue(MoveType.CROSS))
   }
 
   const classes = useStyles();
-  const { dispatch } = useContext(StateContext);
 
   return (
     <Button
