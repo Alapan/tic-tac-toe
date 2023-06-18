@@ -10,33 +10,33 @@ interface BoxProps {
 
 const Box: React.FC<BoxProps> = ({ identifier }) => {
 
-    const [boxValue, setBoxValue] = useState<string>('');
-    const { state, dispatch } = useContext(StateContext);
+  const [boxValue, setBoxValue] = useState<string>('');
+  const { state, dispatch } = useContext(StateContext);
 
-    const handleOnMouseDown = () => {
-        setBoxValue(state.selectedValue)
-    }
+  const handleOnMouseDown = () => {
+    setBoxValue(state.selectedValue)
+  }
 
-    const handleOnMouseUp = () => {
-        dispatch({
-            type: 'update',
-            value: identifier
-        });
-    }
+  const handleOnMouseUp = () => {
+    dispatch({
+      type: 'update',
+      value: identifier
+    });
+  }
 
-    return (
-        <div
-            className='box-cls'
-            onMouseDown={handleOnMouseDown}
-            onMouseUp={handleOnMouseUp}
-        >
-           {
-               boxValue === 'nought' ?
-               <Nought />: (boxValue === 'cross' ?
-               <Cross />: null)
-            }
-        </div>
-    );
+  return (
+    <div
+      className='box-cls'
+      onMouseDown={handleOnMouseDown}
+      onMouseUp={handleOnMouseUp}
+    >
+      {
+        boxValue === 'nought' ?
+        <Nought />: (boxValue === 'cross' ?
+        <Cross />: null)
+      }
+    </div>
+  );
 }
 
 export default Box;

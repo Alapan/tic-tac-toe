@@ -4,23 +4,22 @@ import useStyles from './ButtonStyles';
 import { StateContext } from './state';
 
 const NoughtButton: React.FC = () => {
+  const handleClick = () => {
+    dispatch({ type: 'nought' });
+  }
 
-    const handleClick = () => {
-        dispatch({ type: 'nought' });
-    }
+  const classes = useStyles();
+  const { dispatch } = useContext(StateContext);
 
-    const classes = useStyles();
-    const { dispatch } = useContext(StateContext);
-
-    return (
-        <Button
-            variant='contained'
-            color='secondary'
-            className={classes.button}
-            size='large'
-            onClick={handleClick}
-        >O</Button>
-    );
+  return (
+    <Button
+      variant='contained'
+      color='secondary'
+      className={classes.button}
+      size='large'
+      onClick={handleClick}
+    >O</Button>
+  );
 }
 
 export default NoughtButton;
