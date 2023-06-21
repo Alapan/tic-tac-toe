@@ -5,3 +5,6 @@ export interface GameState {
   selectedValue?: MoveType
 }
 
+export interface State {
+  gameState: GameState
+}

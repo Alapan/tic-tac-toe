@@ -6,13 +6,13 @@ export const SET_SELECTED_VALUE = 'set/selectedValue';
 export const setGameMove = (gameMove: GameMove) => {
   return {
     type: SET_MOVE,
-    move: gameMove
+    payload: gameMove
   }
 }
 
 export const setSelectedValue = (value: MoveType) => {
   return {
     type: SET_SELECTED_VALUE,
-    value
+    payload: value
   }
 }

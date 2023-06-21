@@ -5,8 +5,6 @@ import { useDispatch } from 'react-redux';
 import useStyles from './ButtonStyles';
 import { setSelectedValue } from './actions';
 import { MoveType } from './types';
-import { GameState } from './state';
-
 
 const CrossButton = () => {
 
