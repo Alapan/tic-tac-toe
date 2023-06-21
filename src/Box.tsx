@@ -5,7 +5,7 @@ import Cross from './Cross';
 import { useDispatch, useSelector } from 'react-redux';
 import { setGameMove } from './actions';
 import { MoveType } from './types';
-import { GameState } from './state';
+import { State } from './state';
 
 interface BoxProps {
   identifier: string;
@@ -14,17 +14,19 @@ interface BoxProps {
 const Box = ({ identifier }: BoxProps) => {
   const [boxValue, setBoxValue] = useState<MoveType>();
   const dispatch = useDispatch();
-  const selectedValue = useSelector((state: GameState) => state.selectedValue)
+  const selectedValue = useSelector((state: State) => state.gameState.selectedValue)
 
   const handleOnMouseDown = () => {
     setBoxValue(selectedValue);
   }
 
   const handleOnMouseUp = () => {
-    dispatch(setGameMove({
-      position: identifier,
-      type: boxValue
-    }))
+    if (selectedValue) {
+      dispatch(setGameMove({
+        position: identifier,
+        type: selectedValue
+      }))
+    }
   }
 
   return (

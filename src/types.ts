@@ -1,21 +1,22 @@
-export interface Matrix {
-  a1: string;
-  b1: string;
-  c1: string;
-  a2: string;
-  b2: string;
-  c2: string;
-  a3: string;
-  b3: string;
-  c3: string;
-}
-
 export interface GameMove {
   position: string;
-  type?: MoveType;
+  type: MoveType;
 }
 
 export enum MoveType {
+  DEFAULT = '',
   NOUGHT = 'nought',
   CROSS = 'cross'
+}
+
+export interface Matrix {
+  a1: MoveType;
+  b1: MoveType;
+  c1: MoveType;
+  a2: MoveType;
+  b2: MoveType;
+  c2: MoveType;
+  a3: MoveType;
+  b3: MoveType;
+  c3: MoveType;
 }
