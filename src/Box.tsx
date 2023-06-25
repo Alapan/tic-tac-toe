@@ -3,7 +3,7 @@ import Nought from './Nought';
 import './Box.css';
 import Cross from './Cross';
 import { useDispatch, useSelector } from 'react-redux';
-import { setGameMove } from './actions';
+import { setGameMove, setIsGameOver } from './actions';
 import { MoveType } from './types';
 import { State } from './state';
 
@@ -25,7 +25,8 @@ const Box = ({ identifier }: BoxProps) => {
       dispatch(setGameMove({
         position: identifier,
         type: selectedValue
-      }))
+      }));
+      dispatch(setIsGameOver());
     }
   }
 
