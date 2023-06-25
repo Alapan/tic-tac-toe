@@ -15,8 +15,6 @@ const CrossButton = () => {
   }
 
   const classes = useStyles();
-  const state = useSelector((state) => state);
-  console.log('OVERALL STATE: ', state)
 
   return (
     <Button
