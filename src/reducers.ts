@@ -1,6 +1,6 @@
 import { AnyAction } from "redux";
 import { GameState } from "./state";
-import { SET_MOVE, SET_SELECTED_VALUE } from "./actions";
+import { SET_IS_GAME_OVER, SET_MOVE, SET_SELECTED_VALUE } from "./actions";
 import { GameMove, Matrix, MoveType } from "./types";
 
 export const initialState: GameState = {
@@ -14,7 +14,8 @@ export const initialState: GameState = {
     a3: MoveType.DEFAULT,
     b3: MoveType.DEFAULT,
     c3: MoveType.DEFAULT,
-  }
+  },
+  isGameOver: false
 }
 
 const updateGameMatrix = (state: GameState, gameMove: GameMove) => {
@@ -26,6 +27,46 @@ const updateGameMatrix = (state: GameState, gameMove: GameMove) => {
     }
   }
   return clonedMatrix;
+}
+
+const checkIsGameOver = (state: GameState): boolean => {
+  const winningCombinations = [
+    // Horizontal
+    ['a1', 'b1', 'c1'],
+    ['a2', 'b2', 'c2'],
+    ['a3', 'b3', 'c3'],
+    // Vertical
+    ['a1', 'a2', 'a3'],
+    ['b1', 'b2', 'b3'],
+    ['c1', 'c2', 'c3'],
+    // Diagonal
+    ['a1', 'b2', 'c3'],
+    ['a3', 'b2', 'c1'],
+  ];
+  let currentCombination = '';
+  for (let winningCombination of winningCombinations) {
+    for (let position of winningCombination) {
+      if (state.matrix[position as keyof Matrix] === MoveType.NOUGHT) {
+        currentCombination += 'N';
+      }
+      else if (state.matrix[position as keyof Matrix] === MoveType.CROSS) {
+        currentCombination += 'C';
+      }
+      else if (state.matrix[position as keyof Matrix] === MoveType.DEFAULT) {
+        currentCombination += 'E' // Empty
+      }
+    };
+    if (currentCombination === 'NNN' || currentCombination === 'CCC') {
+      break;
+    } else {
+      currentCombination = '';
+      continue;
+    }
+  };
+  if (!!currentCombination) {
+    return true;
+  }
+  return false;
 }
 
 export const gameReducer = (state: GameState = initialState, action: AnyAction): GameState => {
@@ -41,6 +82,13 @@ export const gameReducer = (state: GameState = initialState, action: AnyAction):
       return {
         ...state,
         selectedValue: action.payload
+      }
+    }
+
+    case SET_IS_GAME_OVER: {
+      return {
+        ...state,
+        isGameOver: checkIsGameOver(state)
       }
     }
 

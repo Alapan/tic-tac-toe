@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './ButtonStyles';
 import { setSelectedValue } from './actions';
@@ -15,6 +15,8 @@ const CrossButton = () => {
   }
 
   const classes = useStyles();
+  const state = useSelector((state) => state);
+  console.log('OVERALL STATE: ', state)
 
   return (
     <Button
