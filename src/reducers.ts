@@ -1,6 +1,12 @@
 import { AnyAction } from "redux";
 import { GameState } from "./state";
-import { SET_IS_GAME_OVER, SET_IS_MOVE_PLAYED, SET_LAST_BOX_PLAYED, SET_MOVE, SET_SELECTED_VALUE } from "./actions";
+import {
+  SET_IS_GAME_OVER,
+  SET_IS_MOVE_PLAYED,
+  SET_LAST_BOX_PLAYED,
+  SET_MOVE,
+  SET_SELECTED_VALUE
+} from "./actions";
 import { GameMove, Matrix, MoveType } from "./types";
 
 export const initialState: GameState = {
