@@ -1,6 +1,12 @@
 import { AnyAction } from "redux";
 import { GameState } from "./state";
-import { SET_IS_GAME_OVER, SET_MOVE, SET_SELECTED_VALUE } from "./actions";
+import {
+  SET_IS_GAME_OVER,
+  SET_IS_MOVE_PLAYED,
+  SET_LAST_BOX_PLAYED,
+  SET_MOVE,
+  SET_SELECTED_VALUE
+} from "./actions";
 import { GameMove, Matrix, MoveType } from "./types";
 
 export const initialState: GameState = {
@@ -15,7 +21,9 @@ export const initialState: GameState = {
     b3: MoveType.DEFAULT,
     c3: MoveType.DEFAULT,
   },
-  isGameOver: false
+  isGameOver: false,
+  isMovePlayed: false,
+  lastBoxPlayed: null
 }
 
 const updateGameMatrix = (state: GameState, gameMove: GameMove) => {
@@ -89,6 +97,20 @@ export const gameReducer = (state: GameState = initialState, action: AnyAction):
       return {
         ...state,
         isGameOver: checkIsGameOver(state)
+      }
+    }
+
+    case SET_IS_MOVE_PLAYED: {
+      return {
+        ...state,
+        isMovePlayed: action.payload
+      }
+    }
+
+    case SET_LAST_BOX_PLAYED: {
+      return {
+        ...state,
+        lastBoxPlayed: action.payload
       }
     }
 

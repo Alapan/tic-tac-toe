@@ -3,14 +3,15 @@ import { Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 
 import useStyles from './ButtonStyles';
-import { setSelectedValue } from './actions';
+import { setIsMovePlayed, setSelectedValue } from './actions';
 import { MoveType } from './types';
 
 const NoughtButton: React.FC = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(setSelectedValue(MoveType.NOUGHT))
+    dispatch(setSelectedValue(MoveType.NOUGHT));
+    dispatch(setIsMovePlayed(false));
   }
 
   const classes = useStyles();
