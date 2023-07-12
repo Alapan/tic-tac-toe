@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import useStyles from './ButtonStyles';
-import { setSelectedValue } from './actions';
+import { setIsMovePlayed, setSelectedValue } from './actions';
 import { MoveType } from './types';
 
 const CrossButton = () => {
@@ -11,7 +11,8 @@ const CrossButton = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(setSelectedValue(MoveType.CROSS))
+    dispatch(setSelectedValue(MoveType.CROSS));
+    dispatch(setIsMovePlayed(false));
   }
 
   const classes = useStyles();

@@ -3,21 +3,41 @@ import Nought from './Nought';
 import './Box.css';
 import Cross from './Cross';
 import { useDispatch, useSelector } from 'react-redux';
-import { setGameMove, setIsGameOver } from './actions';
-import { MoveType } from './types';
+import {
+  setGameMove,
+  setIsGameOver,
+  setIsMovePlayed,
+  setLastBoxPlayed
+} from './actions';
+import { Matrix, MoveType } from './types';
 import { State } from './state';
 
 interface BoxProps {
-  identifier: string;
+  identifier: keyof Matrix;
 }
 
 const Box = ({ identifier }: BoxProps) => {
   const [boxValue, setBoxValue] = useState<MoveType>();
   const dispatch = useDispatch();
-  const selectedValue = useSelector((state: State) => state.gameState.selectedValue)
+  const selectedValue = useSelector((state: State) => state.gameState.selectedValue);
+  const isMovePlayed = useSelector((state: State) => state.gameState.isMovePlayed);
+  const lastBoxPlayed = useSelector((state: State) => state.gameState.lastBoxPlayed);
 
   const handleOnMouseDown = () => {
-    setBoxValue(selectedValue);
+    if (!isMovePlayed) {
+      setBoxValue(selectedValue);
+      dispatch(setLastBoxPlayed(identifier));
+      dispatch(setIsMovePlayed(true));
+    }
+
+    const isBoxValueResetInSameMove = isMovePlayed &&
+      lastBoxPlayed === identifier;
+
+    if (isBoxValueResetInSameMove) {
+      setBoxValue(MoveType.DEFAULT);
+      dispatch(setIsMovePlayed(false));
+      dispatch(setLastBoxPlayed(null));
+    }
   }
 
   const handleOnMouseUp = () => {
