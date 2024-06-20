@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import Nought from './Nought';
-import './Box.css';
-import Cross from './Cross';
+import { useState } from 'react';
+import Nought from '../Nought/Nought';
+import styles from './Box.module.css';
+import Cross from '../Cross/Cross';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setGameMove,
   setIsGameOver,
   setIsMovePlayed,
   setLastBoxPlayed
-} from './actions';
-import { Matrix, MoveType } from './types';
-import { State } from './state';
+} from '../../actions';
+import { Matrix, MoveType } from '../../types';
+import { State } from '../../state';
 
 interface BoxProps {
   identifier: keyof Matrix;
@@ -52,7 +52,7 @@ const Box = ({ identifier }: BoxProps) => {
 
   return (
     <div
-      className='box-cls'
+      className={styles.boxCls}
       onMouseDown={handleOnMouseDown}
       onMouseUp={handleOnMouseUp}
     >

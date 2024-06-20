@@ -1,7 +1,6 @@
-import React from 'react';
-import Box from './Box';
-import CrossButton from './CrossButton';
-import NoughtButton from './NoughtButton';
+import Box from './components/Box/Box';
+import CrossButton from './components/Button/CrossButton';
+import NoughtButton from './components/Button/NoughtButton';
 import './App.css';
 import { Provider } from 'react-redux';
 import store from './store';
