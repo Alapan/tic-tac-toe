@@ -1,8 +1,9 @@
+import { Provider } from 'react-redux';
+
 import Box from './components/Box/Box';
 import CrossButton from './components/Button/CrossButton';
 import NoughtButton from './components/Button/NoughtButton';
 import './App.css';
-import { Provider } from 'react-redux';
 import store from './store';
 
 const App = () => {
