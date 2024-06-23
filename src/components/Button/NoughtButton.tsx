@@ -14,7 +14,6 @@ const NoughtButton = () => {
 
   return (
     <ButtonComponent
-      color='secondary'
       buttonText='O'
       onClick={handleClick}
     />

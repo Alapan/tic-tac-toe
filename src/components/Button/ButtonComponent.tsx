@@ -1,25 +1,16 @@
-import { MouseEvent } from 'react';
-import { Button, PropTypes } from '@material-ui/core';
-
 import styles from './ButtonComponent.module.css';
 
-interface ButtonComponentProps {
-  color: PropTypes.Color | undefined;
+interface ButtonProps {
   onClick: () => void;
   buttonText: string;
 }
 
-const ButtonComponent = ({ color, onClick, buttonText }: ButtonComponentProps) => {
+const ButtonComponent = ({ onClick, buttonText }: ButtonProps) => {
   return (
-    <Button
-      variant='contained'
-      color={color}
+    <button
       className={styles.btnClass}
-      size='large'
       onClick={onClick}
-    >
-      {buttonText}
-    </Button>
+    >{buttonText}</button>
   );
 }
 

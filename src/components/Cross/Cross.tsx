@@ -1,9 +1,15 @@
-import React from 'react';
-
-const Cross: React.FC = () => {
+const Cross = () => {
   return (
-    <h5>Cross</h5>
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      height='48px'
+      viewBox='0 -960 960 960'
+      width='48px'
+      fill='#5f6368'
+    >
+      <path d='m249-207-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z'/>
+    </svg>
   );
-}
+};
 
 export default Cross;
