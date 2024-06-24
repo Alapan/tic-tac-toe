@@ -1,15 +1,16 @@
 import { AnyAction } from "redux";
-import { GameState } from "./state";
+import { BoxState, GameState } from "./state";
 import {
+  SET_BOX_CENTER_COORDINATES,
   SET_IS_GAME_OVER,
   SET_IS_MOVE_PLAYED,
   SET_LAST_BOX_PLAYED,
   SET_MOVE,
   SET_SELECTED_VALUE
 } from "./actions";
-import { GameMove, Matrix, MoveType } from "./types";
+import { GameMove, Matrix, MoveType, Point } from "./types";
 
-export const initialState: GameState = {
+const initialGameState: GameState = {
   matrix: {
     a1: MoveType.DEFAULT,
     b1: MoveType.DEFAULT,
@@ -24,7 +25,24 @@ export const initialState: GameState = {
   isGameOver: false,
   isMovePlayed: false,
   lastBoxPlayed: null
-}
+};
+
+const initialPoint: Point = {
+  x: 0,
+  y: 0,
+};
+
+const initialBoxState: BoxState = {
+  a1: initialPoint,
+  a2: initialPoint,
+  a3: initialPoint,
+  b1: initialPoint,
+  b2: initialPoint,
+  b3: initialPoint,
+  c1: initialPoint,
+  c2: initialPoint,
+  c3: initialPoint,
+};
 
 const updateGameMatrix = (state: GameState, gameMove: GameMove) => {
   const positions: string[] = Object.keys(state.matrix);
@@ -35,7 +53,7 @@ const updateGameMatrix = (state: GameState, gameMove: GameMove) => {
     }
   }
   return clonedMatrix;
-}
+};
 
 const checkIsGameOver = (state: GameState): boolean => {
   const winningCombinations = [
@@ -75,9 +93,9 @@ const checkIsGameOver = (state: GameState): boolean => {
     return true;
   }
   return false;
-}
+};
 
-export const gameReducer = (state: GameState = initialState, action: AnyAction): GameState => {
+export const gameReducer = (state: GameState = initialGameState, action: AnyAction): GameState => {
   switch (action.type) {
     case SET_MOVE: {
       return {
@@ -113,6 +131,19 @@ export const gameReducer = (state: GameState = initialState, action: AnyAction):
         lastBoxPlayed: action.payload
       }
     }
+
+    default:
+      return state;
+  }
+};
+
+export const boxReducer = (state: BoxState = initialBoxState, action: AnyAction): BoxState => {
+  switch (action.type) {
+    case SET_BOX_CENTER_COORDINATES:
+      return {
+        ...state,
+        [action.payload.identifier]: action.payload.point,
+      }
 
     default:
       return state;

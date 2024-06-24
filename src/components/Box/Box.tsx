@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
+  setBoxCenterCoordinates,
   setGameMove,
   setIsGameOver,
   setIsMovePlayed,
   setLastBoxPlayed
 } from '../../actions';
-import { Matrix, MoveType } from '../../types';
+import { Matrix, MoveType, Point } from '../../types';
 import { State } from '../../state';
 import Nought from '../Nought/Nought';
 import Cross from '../Cross/Cross';
@@ -23,6 +24,18 @@ const Box = ({ identifier }: BoxProps) => {
   const selectedValue = useSelector((state: State) => state.gameState.selectedValue);
   const isMovePlayed = useSelector((state: State) => state.gameState.isMovePlayed);
   const lastBoxPlayed = useSelector((state: State) => state.gameState.lastBoxPlayed);
+  const boxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (boxRef.current) {
+      const rect = boxRef.current.getBoundingClientRect();
+      const centerCoordinates: Point = {
+        x: rect.left + (rect.right / 2),
+        y: rect.top + (rect.bottom / 2),
+      };
+      dispatch(setBoxCenterCoordinates(centerCoordinates, identifier));
+    }
+  }, []);
 
   const handleOnMouseDown = () => {
     if (!isMovePlayed) {
@@ -56,6 +69,7 @@ const Box = ({ identifier }: BoxProps) => {
       className={styles.boxCls}
       onMouseDown={handleOnMouseDown}
       onMouseUp={handleOnMouseUp}
+      ref={boxRef}
     >
       {
         boxValue === 'nought' ?
