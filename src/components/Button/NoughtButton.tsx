@@ -16,6 +16,9 @@ const NoughtButton = () => {
     <ButtonComponent
       buttonText='O'
       onClick={handleClick}
+      backgroundColor='#D3A22C'
+      width='70px'
+      height='50px'
     />
   );
 }
