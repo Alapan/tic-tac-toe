@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import Nought from '../Nought/Nought';
-import styles from './Box.module.css';
-import Cross from '../Cross/Cross';
 import { useDispatch, useSelector } from 'react-redux';
+
 import {
   setGameMove,
   setIsGameOver,
@@ -11,6 +9,9 @@ import {
 } from '../../actions';
 import { Matrix, MoveType } from '../../types';
 import { State } from '../../state';
+import Nought from '../Nought/Nought';
+import Cross from '../Cross/Cross';
+import styles from './Box.module.css';
 
 interface BoxProps {
   identifier: keyof Matrix;

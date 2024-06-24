@@ -15,9 +15,11 @@ const CrossButton = () => {
 
   return (
     <ButtonComponent
-      color='primary'
       buttonText='X'
       onClick={handleClick}
+      backgroundColor='#2C5DD3'
+      width='70px'
+      height='50px'
     />
   );
 }
