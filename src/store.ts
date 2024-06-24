@@ -1,10 +1,15 @@
-import { combineReducers, createStore } from "redux";
-import { gameReducer } from "./reducers";
+import { combineReducers, createStore } from 'redux';
+import { composeWithDevTools } from '@redux-devtools/extension';
+
+import { boxReducer, gameReducer, gridSizeReducer, originReducer } from './reducers';
 
 const reducers = combineReducers({
-  gameState: gameReducer
+  gameState: gameReducer,
+  boxState: boxReducer,
+  originState: originReducer,
+  gridState: gridSizeReducer,
 });
 
-const store = createStore(reducers);
+const store = createStore(reducers, composeWithDevTools());
 
 export default store;
