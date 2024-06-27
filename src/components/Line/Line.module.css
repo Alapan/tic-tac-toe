@@ -1,0 +1,14 @@
+.svgCls {
+  display: grid;
+  grid-template-columns: auto;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  position: absolute;
+}
+
+.lineCls {
+  stroke: rgb(0, 255, 13);
+  stroke-width: 2;
+}

@@ -1,3 +1,8 @@
+export interface Point {
+  x: number;
+  y: number;
+}
+
 export interface GameMove {
   position: string;
   type: MoveType;
@@ -9,14 +14,8 @@ export enum MoveType {
   CROSS = 'cross'
 }
 
-export interface Matrix {
-  a1: MoveType;
-  b1: MoveType;
-  c1: MoveType;
-  a2: MoveType;
-  b2: MoveType;
-  c2: MoveType;
-  a3: MoveType;
-  b3: MoveType;
-  c3: MoveType;
-}
+export type Position = 'a1' | 'a2' | 'a3' | 'b1' | 'b2' | 'b3' | 'c1' | 'c2' | 'c3';
+
+export type Matrix = {
+  [key in Position]: MoveType;
+};

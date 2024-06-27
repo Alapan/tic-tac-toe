@@ -1,15 +1,18 @@
 import { AnyAction } from "redux";
-import { GameState } from "./state";
+import { BoxState, GameState, GridState, OriginState } from "./state";
 import {
+  SET_BOX_CENTER_COORDINATES,
+  SET_GRID_SIZE,
   SET_IS_GAME_OVER,
   SET_IS_MOVE_PLAYED,
   SET_LAST_BOX_PLAYED,
   SET_MOVE,
+  SET_ORIGIN_COORDINATES,
   SET_SELECTED_VALUE
 } from "./actions";
-import { GameMove, Matrix, MoveType } from "./types";
+import { GameMove, Matrix, MoveType, Point, Position } from "./types";
 
-export const initialState: GameState = {
+const initialGameState: GameState = {
   matrix: {
     a1: MoveType.DEFAULT,
     b1: MoveType.DEFAULT,
@@ -23,7 +26,42 @@ export const initialState: GameState = {
   },
   isGameOver: false,
   isMovePlayed: false,
-  lastBoxPlayed: null
+  lastBoxPlayed: null,
+  winningCombination: [],
+};
+
+const initialPoint: Point = {
+  x: 0,
+  y: 0,
+};
+
+const initialBoxState: BoxState = {
+  a1: initialPoint,
+  a2: initialPoint,
+  a3: initialPoint,
+  b1: initialPoint,
+  b2: initialPoint,
+  b3: initialPoint,
+  c1: initialPoint,
+  c2: initialPoint,
+  c3: initialPoint,
+};
+
+const initialOriginState: OriginState = {
+  coordinates: {
+    x: 0,
+    y: 0,
+  }
+};
+
+const initialGridState: GridState = {
+  width: 0,
+  height: 0,
+};
+
+interface GameResult {
+  winningCombination: Position[];
+  isGameOver: boolean;
 }
 
 const updateGameMatrix = (state: GameState, gameMove: GameMove) => {
@@ -35,10 +73,10 @@ const updateGameMatrix = (state: GameState, gameMove: GameMove) => {
     }
   }
   return clonedMatrix;
-}
+};
 
-const checkIsGameOver = (state: GameState): boolean => {
-  const winningCombinations = [
+const checkIsGameOver = (state: GameState): GameResult => {
+  const winningCombinations: Position[][] = [
     // Horizontal
     ['a1', 'b1', 'c1'],
     ['a2', 'b2', 'c2'],
@@ -52,8 +90,10 @@ const checkIsGameOver = (state: GameState): boolean => {
     ['a3', 'b2', 'c1'],
   ];
   let currentCombination = '';
-  for (let winningCombination of winningCombinations) {
-    for (let position of winningCombination) {
+  let winningCombination: Position[] = [];
+
+  for (let wc of winningCombinations) {
+    for (let position of wc) {
       if (state.matrix[position as keyof Matrix] === MoveType.NOUGHT) {
         currentCombination += 'N';
       }
@@ -65,6 +105,7 @@ const checkIsGameOver = (state: GameState): boolean => {
       }
     };
     if (currentCombination === 'NNN' || currentCombination === 'CCC') {
+      winningCombination = wc;
       break;
     } else {
       currentCombination = '';
@@ -72,12 +113,18 @@ const checkIsGameOver = (state: GameState): boolean => {
     }
   };
   if (!!currentCombination) {
-    return true;
+    return {
+      winningCombination,
+      isGameOver: true
+    };
   }
-  return false;
-}
+  return {
+    winningCombination,
+    isGameOver: false,
+  };
+};
 
-export const gameReducer = (state: GameState = initialState, action: AnyAction): GameState => {
+export const gameReducer = (state: GameState = initialGameState, action: AnyAction): GameState => {
   switch (action.type) {
     case SET_MOVE: {
       return {
@@ -94,9 +141,11 @@ export const gameReducer = (state: GameState = initialState, action: AnyAction):
     }
 
     case SET_IS_GAME_OVER: {
+      const { isGameOver, winningCombination } = checkIsGameOver(state);
       return {
         ...state,
-        isGameOver: checkIsGameOver(state)
+        isGameOver,
+        winningCombination,
       }
     }
 
@@ -114,6 +163,44 @@ export const gameReducer = (state: GameState = initialState, action: AnyAction):
       }
     }
 
+    default:
+      return state;
+  }
+};
+
+export const boxReducer = (state: BoxState = initialBoxState, action: AnyAction): BoxState => {
+  switch (action.type) {
+    case SET_BOX_CENTER_COORDINATES:
+      return {
+        ...state,
+        [action.payload.identifier]: action.payload.point,
+      }
+
+    default:
+      return state;
+  }
+}
+
+export const originReducer = (state: OriginState = initialOriginState, action: AnyAction) => {
+  switch (action.type) {
+    case SET_ORIGIN_COORDINATES:
+      return {
+        ...state,
+        coordinates: action.payload
+      }
+    default:
+      return state;
+  }
+}
+
+export const gridSizeReducer = (state: GridState = initialGridState, action: AnyAction) => {
+  switch (action.type) {
+    case SET_GRID_SIZE:
+      return {
+        ...state,
+        width: action.payload.width,
+        height: action.payload.height
+      }
     default:
       return state;
   }
