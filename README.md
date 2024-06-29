@@ -1,1 +1,11 @@
-This project is now using Vite for building. This has replaced Create React App.
+## Stack
+
+- [TypeScript](https://typescriptlang.org)
+- [CSS modules](https://github.com/css-modules/css-modules)
+- [Redux](https://redux.js.org/)
+
+## 🧑‍💻 Development
+
+```sh
+yarn start
+```
