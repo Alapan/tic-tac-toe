@@ -44,20 +44,7 @@ const Box = ({ identifier }: BoxProps) => {
     }
   }
   useEffect(() => {
-    if (boxRef.current) {
-      const rect = boxRef.current.getBoundingClientRect();
-      const centerCoordinates: Point = {
-        x: rect.left + ((rect.right - rect.left) / 2),
-        y: rect.top + ((rect.bottom - rect.top) / 2),
-      };
-      dispatch(setBoxCenterCoordinates(centerCoordinates, identifier));
-      if (identifier === 'a1') {
-        dispatch(setOriginCoordinates({
-          x: rect.left,
-          y: rect.top,
-        }))
-      }
-    }
+    handleBoxResize();
     window.addEventListener('resize', handleBoxResize);
   }, []);
 
